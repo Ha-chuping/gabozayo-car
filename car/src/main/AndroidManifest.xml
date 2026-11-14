@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Pleos 내비 (NaviHelper) 권한. 경로 요청은 NAVI_ROUTE_SEARCH 가 필요해요 -->
+    <uses-permission android:name="pleos.car.permission.NAVI_ROUTE"/>
+    <uses-permission android:name="pleos.car.permission.NAVI_ROUTE_SEARCH"/>
+    <uses-permission android:name="pleos.car.permission.NAVI_CUSTOM_MAP"/>
+    <!-- 위치 / 음성 (문서 "Declaring permissions" 페이지에서 확인한 이름) -->
+    <uses-permission android:name="pleos.car.permission.FUSED_LOCATION"/>
+    <uses-permission android:name="pleos.car.permission.TTS_SERVICE"/>
+    <uses-permission android:name="pleos.car.permission.STT_SERVICE"/>
+    <!-- Vehicle SDK: 브레이크 페달 상태 읽기 -->
+    <uses-permission android:name="pleos.car.permission.CAR_DRIVE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 화면을 닫아도 휴대폰에서 온 목적지를 받기 위한 서비스 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <!-- Android 11+ 에서 음성 합성(TTS) 엔진을 찾으려면 필요해요 -->
+    <queries><intent><action android:name="android.intent.action.TTS_SERVICE"/></intent></queries>
+
+    <application android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:name=".CarApp" android:label="가보자요 차량" android:theme="@style/Theme.GabozayoCar" android:supportsRtl="true">
+        <activity android:name=".MainActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <!-- 주행 중에도 쓸 수 있는 화면임을 알려요 (조작은 큰 버튼만, 글 입력 없음) -->
+            <meta-data android:name="distractionOptimized" android:value="true"/>
+        </activity>
+        <service android:name=".KeepAliveService" android:exported="false" android:foregroundServiceType="dataSync"/>
+        <receiver android:name=".SuggestReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="com.gabozayo.car.SUGGEST_GO"/>
+                <action android:name="com.gabozayo.car.SUGGEST_NO"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".BootReceiver" android:exported="true">
+            <intent-filter><action android:name="android.intent.action.BOOT_COMPLETED"/></intent-filter>
+        </receiver>
+    </application>
+</manifest>
