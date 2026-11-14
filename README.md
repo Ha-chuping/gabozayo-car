@@ -22,7 +22,7 @@
 | Pleos Connect 에뮬레이터 | v2.1.0 APIs (Android 14, API 34) |
 | 화면 규격 | 2560 x 1440 px, 160 dpi, 가로 화면 (12.8인치) |
 | 개발 환경 | Android Studio Rabbit 2 (2026.2.2 Patch 1), Kotlin 2.0.20, AGP 8.5.2, minSdk 28 |
-| APK | `apk/夏秋핑_가보자요_car-release.apk` |
+| APK | `apk/夏秋핑_가보자요차량_release.apk` |
 
 ## 5분 만에 둘러보기
 
@@ -30,7 +30,7 @@
 
 1. 차량 에뮬레이터에 APK를 설치한다. `-g` 는 권한을 한 번에 허용하는 옵션이다.
    ```bash
-   adb install -g -r apk/夏秋핑_가보자요_car-release.apk
+   adb install -g -r apk/夏秋핑_가보자요차량_release.apk
    ```
 2. 차량 앱을 열고, 숫자판에 폰 앱 **내 정보 → 내 차량**의 6자리 코드를 입력한다. 연결되면 옵션 화면에 연결 상태가 표시된다.
 3. 폰에서 장소를 **찜**한다. 차량 앱 홈의 카드와 **찜** 탭에 바로 나타난다.
